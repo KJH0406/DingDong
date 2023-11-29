@@ -1,0 +1,55 @@
+import os
+from PIL import Image
+
+def calculate_bbox(img_path)
+    with Image.open(img_path) as img
+        bbox = img.convert(RGBA).getbbox()
+        return bbox
+
+def crop_and_center_image(img_path, output_folder, square_size)
+    with Image.open(img_path) as img
+        bbox = img.convert(RGBA).getbbox()
+        if bbox
+            width = bbox[2] - bbox[0]
+            height = bbox[3] - bbox[1]
+
+            # 중앙에 위치시킬 시작점을 계산
+            x_offset = (square_size - width)  2
+            y_offset = (square_size - height)  2
+
+            # 크롭된 이미지와 정사각형 크기의 새로운 이미지를 생성
+            cropped = img.crop(bbox)
+            new_img = Image.new(RGBA, (square_size, square_size), (0, 0, 0, 0))
+            new_img.paste(cropped, (x_offset, y_offset))
+
+            new_img.save(os.path.join(output_folder, os.path.basename(img_path)))
+
+def main()
+    input_folder = CUsersSSAFYDocumentsassetexportPNG
+    output_folder = cropPNG
+
+    if not os.path.exists(output_folder)
+        os.mkdir(output_folder)
+
+    # 모든 이미지를 순회하면서 최대 크기를 찾는다.
+    max_width = 0
+    max_height = 0
+    for file in os.listdir(input_folder)
+        if file.endswith(.png)
+            bbox = calculate_bbox(os.path.join(input_folder, file))
+            if bbox
+                width = bbox[2] - bbox[0]
+                height = bbox[3] - bbox[1]
+                max_width = max(max_width, width)
+                max_height = max(max_height, height)
+
+    # 가로, 세로 중 큰 값을 기준으로 정사각형의 크기를 결정
+    square_size = max(max_width, max_height)
+
+    # 이미지를 정사각형으로 중앙에 배치하여 저장
+    for file in os.listdir(input_folder)
+        if file.endswith(.png)
+            crop_and_center_image(os.path.join(input_folder, file), output_folder, square_size)
+
+if __name__ == __main__
+    main()
