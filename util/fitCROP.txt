@@ -1,0 +1,28 @@
+import os
+from PIL import Image
+
+def crop_image(img_path, output_folder):
+    # 이미지를 연다.
+    with Image.open(img_path) as img:
+        # 이미지의 누끼(투명 배경)를 기반으로 객체의 경계를 찾는다.
+        bbox = img.convert("RGBA").getbbox()
+        if bbox:
+            # 이미지를 크롭한다.
+            cropped = img.crop(bbox)
+            cropped.save(os.path.join(output_folder, os.path.basename(img_path)))
+
+def main():
+    input_folder = "C:\\Users\\SSAFY\\Documents\\asset\\exportPNG_1"
+    output_folder = "cropPNG"
+
+    # 현재 디렉토리에서 cropPNG 폴더가 없으면 만든다.
+    if not os.path.exists(output_folder):
+        os.mkdir(output_folder)
+
+    # input_folder에서 모든 png 파일을 가져와 처리한다.
+    for file in os.listdir(input_folder):
+        if file.endswith(".png"):
+            crop_image(os.path.join(input_folder, file), output_folder)
+
+if __name__ == "__main__":
+    main()
