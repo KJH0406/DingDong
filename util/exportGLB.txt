@@ -1,0 +1,27 @@
+import bpy
+import os
+
+# 현재 블랜더 파일 경로 가져오기
+current_directory = bpy.path.abspath("//")
+
+# 내보낼 경로 지정: 현재 디렉토리 밑에 'exportGLB' 폴더
+export_path = os.path.join(current_directory, "exportGLB")
+
+# 폴더가 없으면 생성
+if not os.path.exists(export_path):
+    os.makedirs(export_path)
+
+# 현재 씬(scene)의 모든 콜렉션(collection)을 순회
+for collection in bpy.context.scene.collection.children:
+    for obj in collection.objects:
+        # 각 객체를 개별적으로 선택
+        bpy.ops.object.select_all(action='DESELECT')
+        obj.select_set(True)
+        
+        # 파일 이름과 경로 설정
+        file_name = os.path.join(export_path, obj.name + '.glb')
+        
+        # GLB로 내보내기 (선택된 객체만)
+        bpy.ops.export_scene.gltf(filepath=file_name, export_format='GLB', use_selection=True)
+
+print("All objects from collections have been exported to the 'exportGLB' folder!")
