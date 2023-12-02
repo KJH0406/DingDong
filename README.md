@@ -1,8 +1,10 @@
-# :love_letter: 딩동! 편지왔어요. 딩동! 놀러왔어요. :house:
+# 💌 딩동! 편지왔어요. 딩동! 놀러왔어요! 🏡
 <div align="center">
     <img src="https://github.com/Semibro/Semibro/assets/71372469/16e22552-e8a1-4646-bf49-71bcfed6471e" width="300px"/>
 </div>  
 <br />
+
+🔔 개성을 표현하기 위한 방 꾸미기, 사용자 간 편지를 이용한 소통, 멀티 플레이를 통한 실시간 상호작용을 제공하는 인터랙티브 SNS 서비스 입니다.
 
 ## 목차
 1. [프로젝트 개요](#프로젝트-소개)
